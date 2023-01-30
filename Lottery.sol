@@ -12,4 +12,12 @@ contract Lottery {
         require(msg.value > .01 ether);
         Players.push(msg.sender);
     }
+    function Random() private view returns (uint){
+        return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, Players)));
+    }
+    function pickWinner() public {
+        require(msg.sender == Manager);
+        payable(Players[(Random() % Players.length)]).transfer(address(this).balance);
+        Players = new address[](0);
+    }
 }
