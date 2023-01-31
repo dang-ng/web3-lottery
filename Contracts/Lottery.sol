@@ -8,6 +8,9 @@ contract Lottery {
     constructor(){
         Manager = msg.sender;
     }
+    function getPlayers() public view returns (address[] memory){
+        return Players;
+    }
     function Enter() public payable {
         require(msg.value > .01 ether);
         Players.push(msg.sender);
@@ -15,9 +18,12 @@ contract Lottery {
     function Random() private view returns (uint){
         return uint(keccak256(abi.encodePacked(block.difficulty, block.timestamp, Players)));
     }
-    function pickWinner() public {
-        require(msg.sender == Manager);
+    function pickWinner() public restricted {
         payable(Players[(Random() % Players.length)]).transfer(address(this).balance);
         Players = new address[](0);
+    }
+    modifier restricted(){
+        require(msg.sender == Manager);
+        _;
     }
 }

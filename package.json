@@ -1,0 +1,28 @@
+{
+  "name": "web3-lottery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Lottery.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dang-ng/web3-lottery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dang-ng/web3-lottery/issues"
+  },
+  "homepage": "https://github.com/dang-ng/web3-lottery#readme",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.5",
+    "assert": "^2.0.0",
+    "ganache": "^7.7.3",
+    "ganache-cli": "^6.12.2",
+    "mocha": "^10.2.0",
+    "solc": "^0.8.17",
+    "web3": "^1.8.2"
+  }
+}
