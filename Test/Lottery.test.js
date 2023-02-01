@@ -9,11 +9,16 @@ let inbox
 
 beforeEach(async ()=>{
     account = await web3.eth.getAccounts()
-    inbox = await new web3.eth.Contract(abi).deploy({data:evm.bytecode.object}).send({from:account[0],gas:'1000000'})
+    lottery = await new web3.eth.Contract(abi).deploy({data:evm.bytecode.object}).send({from:account[0],gas:'1000000'})
 })
 
-describe('Inbox',()=>{
-    it('test1',()=>{
-        assert.ok(inbox.option.address)
+describe('Lottery contract',()=>{
+    it('deploy a contract',()=>{
+        assert.ok(lottery.options.address)
+    })
+    it('allow 1 account to enter',async ()=>{
+        await lottery.methods.Enter().send({
+            from: account[0],gas: web3.utils.toWei('0.00000001', 'ether')
+        })
     })
 })
